@@ -46,3 +46,43 @@
   console.log(solution([8, 8, 6, 6, 6, 8, 8]));
   console.log(solution([4, 2, 4]));
 })();
+
+(function shortestSubsctring() {
+  // Для заданной строки s найдите длину самой длинной подстроки без повторяющихся символов.
+
+  // Примеры:
+  // Ввод: s = "abcabcbb"
+  // Вывод: 3
+  // Объяснение: Ответ "abc" длиной 3.
+
+  // Ввод: s = "bbbbb"
+  // Вывод: 1
+  // Объяснение: Ответ "b" длиной 1.
+
+  // Ввод: s = "pwwkew"
+  // Вывод: 3
+  // Объяснение: Ответ "wke" длиной 3.
+  // Обратите внимание, что ответ должен быть подстрокой, «pwke» — это подпоследовательность, а не подстрока.
+
+  function solution(str) {
+    let variants = [];
+    let result = '';
+    for (let index = 0, len = str.length; index < len; index++) {
+      const char = str[index];
+      if (result.includes(char)) {
+        variants.push(result);
+        result = char;
+      } else {
+        result += char;
+        if (index === str.length - 1) {
+          variants.push(result);
+        }
+      }
+    }
+    return Math.max(...variants.map((v) => v.length));
+  }
+
+  console.log(solution('abcabcbb'));
+  console.log(solution('pwwkew'));
+  console.log(solution('bbbb'));
+})();
