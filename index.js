@@ -34,18 +34,13 @@
   // Ввод: nums = [8, 8, 6, 6, 6, 8, 8]
   // Вывод: 8
   function solution(list) {
-    const counting = list.reduce((s, item) => {
-      s[item] = s[item] ? s[item] + 1 : 1;
-      return s;
+    const counting = list.reduce((result, num) => {
+      let curr = result[num];
+      result[num] = curr ? ++curr : 1;
+      return result;
     }, {});
-    let max = 0;
-    Object.entries(counting).reduce((r, [k, v]) => {
-      if (v > r) {
-        max = k;
-      }
-      return r;
-    }, 0);
-    return max;
+    const max = Math.max(...Object.values(counting));
+    return Object.keys(counting).find((key) => counting[key] === max);
   }
 
   console.log(solution([8, 8, 6, 6, 6, 8, 8]));
