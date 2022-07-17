@@ -86,3 +86,29 @@
   console.log(solution('pwwkew'));
   console.log(solution('bbbb'));
 })();
+
+(function uniqueElement() {
+  //   Условие задачи:
+  // Дан непустой массив целых чисел nums, каждый элемент появляется дважды, за исключением одного. Найдите этот самый единственный элемент.
+  // Вы должны реализовать решение с линейной сложностью и использовать только постоянное дополнительное пространство.
+  //   Пример:
+  // Ввод: nums = [8, 8, 6]
+  // Вывод: 6
+  // Ввод: nums = [4, 1, 2, 1, 2]
+  // Вывод: 4
+
+  function solution(list) {
+    let collect = list.reduce((counter, item, index) => {
+      counter[item] = counter[item] ? counter[item] + 1 : 1;
+      return counter;
+    }, {});
+    const [[result]] = Object.entries(collect).filter(([k, v]) => {
+      return v === 1;
+    });
+    return result;
+  }
+
+  console.log(solution([8, 8, 6]));
+  console.log(solution([4, 1, 2, 1, 2]));
+  console.log(solution([4, 5, 2, 1, 2, 1, 4, 7, 7, 7]));
+})();
